@@ -1,14 +1,31 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, remove } from 'vue';
 import { onMounted } from 'vue';
-import { getUsers } from '../apis/userAPI';
+import { getUsers } from '../apis/userAPI.js';
+import { useUserStore } from '../store/user.js'; 
 
+const {users, fetchUsers, removeUser } = useUserStore();
 
-const users = ref([]);
+try {
+  fetchUsers();
+} catch (error) {
+  console.error("Felhasználók betoltése sikertelen", error)
+}
 
-onMounted(async () => {
-  users.value = await getUsers();
-})
+async function handleDeleteUser(id) {
+//console.log(id)
+
+const valasz = confirm("Biztos törlöd?")
+
+if (valasz) {
+  try { 
+    await removeUser(id) 
+  }
+  catch (error) {
+    console.error("Hibás törlés!", error)
+  }
+  }
+}
 </script>
 
 <template>
@@ -29,7 +46,7 @@ onMounted(async () => {
           <td>{{ user.email }}</td>
           <td>
             <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" @click="handleDeleteUser(user.id)">Delete</button>
           </td>
         </tr>
     </tbody>
