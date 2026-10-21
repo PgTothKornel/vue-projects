@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from '../store/user';
-import Users_table from './components/users_table.vue';
+import Users_table from './components/UsersTable.vue';
 
 const { fetchUsers } = useUserStore();
 
