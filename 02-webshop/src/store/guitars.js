@@ -1,5 +1,9 @@
 import { ref } from "vue";
+import { useToast} from 'vue-toastification'
 
+// GUITARS
+
+const toast = useToast();
 const guitars = ref([]);
 
 export function useGuitarStore() {
@@ -12,7 +16,7 @@ export function useGuitarStore() {
             guitars.value = await response.json();
         } catch (error)
         {
-            console.log(error.message)
+            toast.error(error.message)
         }
     }
     return { fetchGuitars, guitars};
