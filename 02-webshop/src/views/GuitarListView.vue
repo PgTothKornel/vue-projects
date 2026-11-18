@@ -1,8 +1,10 @@
-<script setup></script>
+<script setup>
+import GuitarsList from '@/components/GuitarsList.vue';
+</script>
 
 <template>
     <div>
-        GuitarsList
+        <GuitarsList/>
     </div>
 </template>
 
