@@ -17,5 +17,6 @@ defineProps({
 .guitar_img {
     height: 15rem;
     float: left;
+    border-right: 2px solid black;
 }
 </style>
